@@ -12,7 +12,7 @@
         "joinURL": "https://github.com/goerli/medalla/blob/master/zinken/README.md",
         "issuesURL": "https://github.com/protolambda/zinken.eth2.wtf/issues",
         "forkURL": "https://github.com/protolambda/zinken.eth2.wtf",
-        "serverAddr": "grpc.zinken.eth2.wtf",
+        "serverAddr": "grpc.zinken.eth2.wtf:8080",
         "forkName": "zinken"
     },
     "others": {

@@ -93,7 +93,7 @@ export const AddNode: React.FC = () => {
                 `alethio/eth2stats-client:latest run \\` + "\n" +
                 `--eth2stats.node-name="${nodeName}" \\` + "\n" +
                 `--data.folder="/data" \\` + "\n" +
-                `--eth2stats.addr="${network.serverAddr}" --eth2stats.tls=true \\` + "\n" +
+                `--eth2stats.addr="${network.serverAddr}" --eth2stats.tls=false \\` + "\n" +
                 `--beacon.type="${node.type}" \\` + "\n" +
                 `--beacon.addr="${node.beaconAddr}"`;
             if (node.metricsEnabled && node.metricsAddr !== "") {
@@ -108,7 +108,7 @@ export const AddNode: React.FC = () => {
                 `./eth2stats-client run \\` + "\n" +
                 `--eth2stats.node-name="${nodeName}" \\` + "\n" +
                 `--data.folder ${dataFolder} \\` + "\n" +
-                `--eth2stats.addr="${network.serverAddr}" --eth2stats.tls=true \\` + "\n" +
+                `--eth2stats.addr="${network.serverAddr}" --eth2stats.tls=false \\` + "\n" +
                 `--beacon.type="${node.type}" \\` + "\n" +
                 `--beacon.addr="${node.beaconAddr}"`;
             if (node.metricsEnabled && node.metricsAddr !== "") {
