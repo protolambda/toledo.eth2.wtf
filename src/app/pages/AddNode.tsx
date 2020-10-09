@@ -20,7 +20,14 @@ const NodeList: INode[] = [
         type: "lighthouse",
         beaconAddr: "http://localhost:5052",
         beaconAddrDetails: "HTTP endpoint for the beacon chain node's RESTful JSON API",
-        metricsAddr: "http://localhost:5052/metrics",
+        metricsAddr: "http://localhost:5054/metrics",
+        metricsEnabled: true
+    },
+    {
+        type: "lodestar",
+        beaconAddr: "http://localhost:9596",
+        beaconAddrDetails: "HTTP endpoint for the beacon chain node's RESTful JSON API",
+        metricsAddr: "http://localhost:8008/metrics",
         metricsEnabled: true
     },
     {
@@ -69,6 +76,12 @@ export const AddNode: React.FC = () => {
                 title: "Lighthouse Book"
             };
             break;
+        case "lodestar":
+            nodeTypeDetails = {
+                url: "https://chainsafe.github.io/lodestar/",
+                title: "Lodestar Docs"
+            };
+            break;
         case "nimbus":
             nodeTypeDetails = {
                 url: "https://nimbus.team/docs/",
@@ -84,6 +97,11 @@ export const AddNode: React.FC = () => {
 
     }
 
+    let beaconAPIType = node.type;
+    if (node.type === "lighthouse" || node.type === "lodestar") {
+        beaconAPIType = "v1";
+    }
+
     let runCode = "\n\n# Please type in your Node Name\n\n\n";
     if (nodeName !== "") {
         if (runClient === "docker") {
@@ -94,7 +112,7 @@ export const AddNode: React.FC = () => {
                 `--eth2stats.node-name="${nodeName}" \\` + "\n" +
                 `--data.folder="/data" \\` + "\n" +
                 `--eth2stats.addr="${network.serverAddr}" --eth2stats.tls=false \\` + "\n" +
-                `--beacon.type="${node.type}" \\` + "\n" +
+                `--beacon.type="${beaconAPIType}" \\` + "\n" +
                 `--beacon.addr="${node.beaconAddr}"`;
             if (node.metricsEnabled && node.metricsAddr !== "") {
                 runCode += " \\\n" + `--beacon.metrics-addr="${node.metricsAddr}"`;
@@ -109,7 +127,7 @@ export const AddNode: React.FC = () => {
                 `--eth2stats.node-name="${nodeName}" \\` + "\n" +
                 `--data.folder ${dataFolder} \\` + "\n" +
                 `--eth2stats.addr="${network.serverAddr}" --eth2stats.tls=false \\` + "\n" +
-                `--beacon.type="${node.type}" \\` + "\n" +
+                `--beacon.type="${beaconAPIType}" \\` + "\n" +
                 `--beacon.addr="${node.beaconAddr}"`;
             if (node.metricsEnabled && node.metricsAddr !== "") {
                 runCode += " \\\n" + `--beacon.metrics-addr="${node.metricsAddr}"`;
@@ -134,7 +152,11 @@ export const AddNode: React.FC = () => {
                         <div>
                             <p>
                                 Eth2Stats needs to run a data collector app that connects
-                                to your beacon chain client
+                                to your beacon chain client.
+                            </p>
+                            <p>
+                                See the <a target="_blank" className="font-underline" href="https://github.com/Alethio/eth2stats-client">
+                                eth2stats-client docs</a> for more information.
                             </p>
                         </div>
 
@@ -152,11 +174,7 @@ export const AddNode: React.FC = () => {
                                     onChange={e => setNodeName(e.target.value)}
                                 />
                                 <p className="text-gray-600 text-md italic">
-                                    This is the name that your node will display on
-                                    &nbsp;
-                                    <a href="https://eth2stats.io/">
-                                        Eth2Stats
-                                    </a>
+                                    This is the name that your node will display as.
                                 </p>
                             </div>
                         </div>
@@ -196,11 +214,8 @@ export const AddNode: React.FC = () => {
                                 </p>
                                 <p className="text-gray-600 text-md italic -mt-1">
                                     For more information
-                                    on {node.type.charAt(0).toUpperCase() + node.type.slice(1)} &nbsp;
-                                    check out the  &nbsp;
-                                    <a href={nodeTypeDetails.url} target="_blank">
-                                        {nodeTypeDetails.title}
-                                    </a>
+                                    on {node.type.charAt(0).toUpperCase() + node.type.slice(1)} check out
+                                    the <a className="font-underline" href={nodeTypeDetails.url} target="_blank">{nodeTypeDetails.title}</a>
                                 </p>
                             </div>
                         </div>
