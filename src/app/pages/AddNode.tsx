@@ -155,7 +155,8 @@ export const AddNode: React.FC = () => {
                                 to your beacon chain client.
                             </p>
                             <p>
-                                See the <a target="_blank" className="font-underline" href="https://github.com/Alethio/eth2stats-client">
+                                See the <a target="_blank" className="font-underline"
+                                           href="https://github.com/Alethio/eth2stats-client">
                                 eth2stats-client docs</a> for more information.
                             </p>
                         </div>
@@ -215,7 +216,8 @@ export const AddNode: React.FC = () => {
                                 <p className="text-gray-600 text-md italic -mt-1">
                                     For more information
                                     on {node.type.charAt(0).toUpperCase() + node.type.slice(1)} check out
-                                    the <a className="font-underline" href={nodeTypeDetails.url} target="_blank">{nodeTypeDetails.title}</a>
+                                    the <a className="font-underline"
+                                           href={nodeTypeDetails.url} target="_blank">{nodeTypeDetails.title}</a>
                                 </p>
                             </div>
                         </div>
