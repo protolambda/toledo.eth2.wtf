@@ -5,9 +5,9 @@ module.exports = {
         extend: {
             colors: {
                 primary: {
-                    ...colors.blue,
-                    '500': "#0d6e94",
-                    '900': "#003951",
+                    ...colors.indigo,
+                    '500': "#667eea",
+                    '900': "#3c366b",
                 },
                 grey: {
                     '100': "#faf7f7",
@@ -15,8 +15,8 @@ module.exports = {
                     '600': "#3f6f7a",
                 },
                 darkprimary: {
-                    '100': "#00171f",
-                    '200': "#001218",
+                    '100': "#14182d",
+                    '200': "#0c0c1c",
                 }
             },
             width: {
